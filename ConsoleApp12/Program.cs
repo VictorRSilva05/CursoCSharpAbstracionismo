@@ -1,5 +1,6 @@
 ﻿using ConsoleApp12.Entities;
 using ConsoleApp12.Entities.Enums;
+using System.Globalization;
 namespace ConsoleApp12
 {
     internal class Program
@@ -17,22 +18,22 @@ namespace ConsoleApp12
                 Console.Write("Rectangle or circle (r / c) ? ");
                 string shape = Console.ReadLine().ToLower();
 
-                Console.WriteLine("Color (Black / Red / Blue) ");
+                Console.Write("Color (Black / Red / Blue) ");
                 string color = Console.ReadLine();
 
                 if (shape == "r")
                 {
                     Console.Write("Width: ");
-                    double width = double.Parse(Console.ReadLine());
-                    Console.WriteLine("Height: ");
-                    double height = double.Parse(Console.ReadLine());
+                    double width = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+                    Console.Write("Height: ");
+                    double height = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
 
                     list.Add(new Rectangle(Enum.Parse<Colors>(color),width,height));
                 }
                 else if (shape == "c" )
                 {
                     Console.Write("Radius: ");
-                    double radius = double.Parse(Console.ReadLine());
+                    double radius = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
 
                     list.Add(new Circle(Enum.Parse<Colors>(color),radius));
                 }
@@ -40,6 +41,12 @@ namespace ConsoleApp12
                 {
                     Console.WriteLine("Invalid input!");
                 }
+            }
+
+            Console.WriteLine("\nSHAPE AREAS:");
+            foreach (Shape shape in list)
+            {
+                Console.WriteLine(shape.Area().ToString("F2"));
             }
         }
     }
